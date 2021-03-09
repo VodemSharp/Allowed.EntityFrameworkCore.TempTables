@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1A1F4754-C3E5-42FC-AF9F-C3ED217E6E64}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{DEF40269-9AD2-45A0-9F74-BBA55CF5BECF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Allowed.EntityFrameworkCore.TempTables.Sample", "Allowed.EntityFrameworkCore.TempTables.Sample\Allowed.EntityFrameworkCore.TempTables.Sample.csproj", "{99ADFC61-5A20-4D8C-A8CF-6EE9EAF9CA4D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Allowed.EntityFrameworkCore.TempTables.PostgreSql", "Allowed.EntityFrameworkCore.TempTables.PostgreSql\Allowed.EntityFrameworkCore.TempTables.PostgreSql.csproj", "{0682497B-FEAE-4AB8-A606-BB6F132D8914}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{99ADFC61-5A20-4D8C-A8CF-6EE9EAF9CA4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99ADFC61-5A20-4D8C-A8CF-6EE9EAF9CA4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99ADFC61-5A20-4D8C-A8CF-6EE9EAF9CA4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99ADFC61-5A20-4D8C-A8CF-6EE9EAF9CA4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0682497B-FEAE-4AB8-A606-BB6F132D8914}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0682497B-FEAE-4AB8-A606-BB6F132D8914}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0682497B-FEAE-4AB8-A606-BB6F132D8914}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0682497B-FEAE-4AB8-A606-BB6F132D8914}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{99ADFC61-5A20-4D8C-A8CF-6EE9EAF9CA4D} = {DEF40269-9AD2-45A0-9F74-BBA55CF5BECF}
+		{0682497B-FEAE-4AB8-A606-BB6F132D8914} = {1A1F4754-C3E5-42FC-AF9F-C3ED217E6E64}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D491BAFB-B01C-424B-AD40-51BF9820ABA4}
+	EndGlobalSection
+EndGlobal
