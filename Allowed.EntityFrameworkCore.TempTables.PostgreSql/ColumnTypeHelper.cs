@@ -10,7 +10,8 @@ namespace Allowed.EntityFrameworkCore.TempTables.PostgreSql
     public static class ColumnTypeHelper
     {
         private static readonly Dictionary<Type, string> Types =
-            new Dictionary<Type, string> {
+            new()
+            {
                 { typeof(bool), "boolean" },
                 { typeof(byte), "smallint" },
                 { typeof(sbyte), "smallint" },
@@ -51,7 +52,8 @@ namespace Allowed.EntityFrameworkCore.TempTables.PostgreSql
         }
 
         private static readonly Dictionary<Type, Func<string, string>> Funcs =
-            new Dictionary<Type, Func<string, string>> {
+            new()
+            {
                 { typeof(bool), null },
                 { typeof(byte), null },
                 { typeof(sbyte), null },
@@ -108,7 +110,7 @@ namespace Allowed.EntityFrameworkCore.TempTables.PostgreSql
             if (value == null)
                 return "NULL";
 
-            Func<string, string> prepareFunc = Funcs[type];
+            Func<string, string> prepareFunc = Funcs.ContainsKey(type) ? Funcs[type] : null;
 
             if (prepareFunc != null)
                 return prepareFunc.Invoke(value);

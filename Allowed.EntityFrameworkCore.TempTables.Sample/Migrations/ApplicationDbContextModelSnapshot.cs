@@ -46,13 +46,41 @@ namespace Allowed.EntityFrameworkCore.TempTables.Sample.Migrations
                     b.Property<string>("State")
                         .HasColumnType("text");
 
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("Latitude");
-
-                    b.HasIndex("Longitude");
+                    b.HasIndex("Latitude", "Longitude");
 
                     b.ToTable("Addresses");
+                });
+
+            modelBuilder.Entity("Allowed.EntityFrameworkCore.TempTables.Sample.Data.TempTables.TempAddress", b =>
+                {
+                    b.Property<string>("Address1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Address2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("City")
+                        .HasColumnType("text");
+
+                    b.Property<double>("Latitude")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("text");
+
+                    b.Property<string>("State")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
                 });
 #pragma warning restore 612, 618
         }

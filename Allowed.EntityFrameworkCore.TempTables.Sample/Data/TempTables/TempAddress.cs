@@ -1,4 +1,6 @@
-﻿namespace Allowed.EntityFrameworkCore.TempTables.Sample.Data.TempTables
+﻿using Allowed.EntityFrameworkCore.TempTables.Sample.Enums;
+
+namespace Allowed.EntityFrameworkCore.TempTables.Sample.Data.TempTables
 {
     public class TempAddress
     {
@@ -10,5 +12,7 @@
 
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+
+        public AddressType Type { get; set; }
     }
 }

@@ -21,11 +21,8 @@ namespace Allowed.EntityFrameworkCore.TempTables.Sample.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Address>().HasIndex(d => d.Latitude);
-            builder.Entity<Address>().HasIndex(d => d.Longitude);
-
-            builder.TempTable<TempAddress>().HasIndex(d => d.Latitude);
-            builder.TempTable<TempAddress>().HasIndex(d => d.Longitude);
+            builder.Entity<Address>().HasIndex(d => new { d.Latitude, d.Longitude });
+            builder.TempTable<TempAddress>().HasIndex(d => new { d.Latitude, d.Longitude });
         }
 
         public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>

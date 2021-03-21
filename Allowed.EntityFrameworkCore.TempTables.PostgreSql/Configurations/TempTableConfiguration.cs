@@ -6,7 +6,7 @@ namespace Allowed.EntityFrameworkCore.TempTables.PostgreSql.Configurations
     public class TempTableConfiguration
     {
         public Type Type { get; set; }
-        public List<ColumnConfiguration> ColumnConfigurations { get; set; } = new List<ColumnConfiguration> { };
+        public List<ColumnsConfiguration> ColumnConfigurations { get; set; } = new List<ColumnsConfiguration> { };
 
         public TempTableConfiguration(Type type)
         {

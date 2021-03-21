@@ -2,11 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <Version>1.0.0</Version>
+    <Version>1.1.0</Version>
+    <Company>Allowed Inc.</Company>
+    <Authors>VodemSharp</Authors>
+    <Product>AllowedSharp</Product>
     <Description>Temp tables extension for Entity Framework Core with PostgreSql provider.</Description>
     <PackageIcon>icon.png</PackageIcon>
-    <RepositoryUrl>https://github.com/VodemSharp/Allowed.EntityFrameworkCore.TempTables</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageId>Allowed.EntityFrameworkCore.TempTables.PostgreSql</PackageId>
+    <RepositoryUrl>https://github.com/VodemSharp/Allowed.EntityFrameworkCore.TempTables</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

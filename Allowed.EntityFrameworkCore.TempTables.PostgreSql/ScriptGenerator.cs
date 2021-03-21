@@ -1,12 +1,12 @@
 ﻿using Allowed.EntityFrameworkCore.TempTables.PostgreSql.Configurations;
 using Allowed.EntityFrameworkCore.TempTables.PostgreSql.Entities;
+using Allowed.EntityFrameworkCore.TempTables.PostgreSql.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Allowed.EntityFrameworkCore.TempTables.PostgreSql
 {
@@ -21,7 +21,7 @@ namespace Allowed.EntityFrameworkCore.TempTables.PostgreSql
 
         private static List<EntityColumn> ListColumns<T>()
         {
-            List<EntityColumn> columns = new List<EntityColumn> { };
+            List<EntityColumn> columns = new() { };
             foreach (PropertyInfo property in typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance)
                                                     .Where(p => !p.GetCustomAttributes<NotMappedAttribute>().Any()))
             {
@@ -48,7 +48,10 @@ namespace Allowed.EntityFrameworkCore.TempTables.PostgreSql
 
         public static string GetCreate<T>(string tableName)
         {
-            StringBuilder builder = new StringBuilder($"CREATE TEMP TABLE \"{tableName}\" (");
+            DatabaseConfiguration dbConfig = DatabaseConfiguration.GetInstance();
+            TempTableConfiguration config = dbConfig.TempTableConfigurations.First();
+
+            StringBuilder builder = new($"CREATE TEMP TABLE \"{tableName}\" (");
 
             int i = 0;
             foreach (EntityColumn column in ListColumns<T>())
@@ -66,24 +69,32 @@ namespace Allowed.EntityFrameworkCore.TempTables.PostgreSql
 
             builder.Append("\n);");
 
-            DatabaseConfiguration dbConfig = DatabaseConfiguration.GetInstance();
-            TempTableConfiguration config = dbConfig.TempTableConfigurations.FirstOrDefault();
-
             if (config != null)
             {
-                foreach (ColumnConfiguration columnConfig in config.ColumnConfigurations)
+                foreach (ColumnsConfiguration columnConfig in config.ColumnConfigurations)
                 {
-                    if (columnConfig.Type == Enums.ColumnConfigurationTypes.Index)
-                        builder.Append($"\nCREATE INDEX \"IX_{tableName}_{columnConfig.Name}\" ON \"{tableName}\" (\"{columnConfig.Name}\");");
+                    if (columnConfig.Type == ColumnConfigurationTypes.Index)
+                        builder.Append($"\nCREATE INDEX \"IX_{tableName}_{string.Join('_', columnConfig.Names)}\" ON \"{tableName}\" (\"{string.Join("\", \"", columnConfig.Names)}\");");
                 }
             }
 
             return builder.ToString();
         }
 
-        public static async Task<string> GetInsert<T>(string tableName, List<T> entities)
+        private static string PrepareValue<T>(T entity, string columnName)
         {
-            StringBuilder builder = new StringBuilder($"INSERT INTO \"{tableName}\" (");
+            PropertyInfo propertyInfo = typeof(T).GetProperty(columnName);
+            object value = propertyInfo.GetValue(entity);
+
+            if (propertyInfo.PropertyType.IsEnum)
+                return ((int)Enum.Parse(propertyInfo.PropertyType, value?.ToString())).ToString();
+            else
+                return value?.ToString().Replace("'", "''");
+        }
+
+        public static string GetInsert<T>(string tableName, List<T> entities)
+        {
+            StringBuilder builder = new($"INSERT INTO \"{tableName}\" (");
             List<EntityColumn> columns = ListColumns<T>();
 
             int i = 0;
@@ -102,7 +113,7 @@ namespace Allowed.EntityFrameworkCore.TempTables.PostgreSql
             foreach (T entity in entities)
             {
                 if (i == 0)
-                    builder.Append("(");
+                    builder.Append('(');
                 else
                     builder.Append(",\n(");
 
@@ -112,7 +123,8 @@ namespace Allowed.EntityFrameworkCore.TempTables.PostgreSql
                     if (j != 0)
                         builder.Append(", ");
 
-                    builder.Append(ColumnTypeHelper.GetForQuery(column.Type, typeof(T).GetProperty(column.Name).GetValue(entity)?.ToString()));
+                    builder.Append(ColumnTypeHelper.GetForQuery(column.Type, PrepareValue(entity, column.Name)));
+
                     j++;
                 }
 

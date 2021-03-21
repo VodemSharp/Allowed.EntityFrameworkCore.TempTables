@@ -19,7 +19,8 @@ namespace Allowed.EntityFrameworkCore.TempTables.Sample.Migrations
                     State = table.Column<string>(type: "text", nullable: true),
                     PostalCode = table.Column<string>(type: "text", nullable: true),
                     Latitude = table.Column<double>(type: "double precision", nullable: false),
-                    Longitude = table.Column<double>(type: "double precision", nullable: false)
+                    Longitude = table.Column<double>(type: "double precision", nullable: false),
+                    Type = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -27,14 +28,9 @@ namespace Allowed.EntityFrameworkCore.TempTables.Sample.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Addresses_Latitude",
+                name: "IX_Addresses_Latitude_Longitude",
                 table: "Addresses",
-                column: "Latitude");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Addresses_Longitude",
-                table: "Addresses",
-                column: "Longitude");
+                columns: new[] { "Latitude", "Longitude" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

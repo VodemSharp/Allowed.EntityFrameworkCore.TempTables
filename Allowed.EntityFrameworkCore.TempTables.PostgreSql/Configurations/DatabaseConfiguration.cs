@@ -5,7 +5,7 @@ namespace Allowed.EntityFrameworkCore.TempTables.PostgreSql.Configurations
     public class DatabaseConfiguration
     {
         private static DatabaseConfiguration _instance;
-        private readonly static object _locker = new object();
+        private readonly static object _locker = new();
 
         public static DatabaseConfiguration GetInstance()
         {

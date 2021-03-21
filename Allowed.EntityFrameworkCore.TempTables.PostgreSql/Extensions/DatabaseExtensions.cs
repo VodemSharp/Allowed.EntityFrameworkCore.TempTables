@@ -16,14 +16,19 @@ namespace Allowed.EntityFrameworkCore.TempTables.PostgreSql.Databases
         public static async Task AddAsync<T>(this DbContext db, string tableName, T entity)
             where T : class
         {
-            string script = await ScriptGenerator.GetInsert(tableName, new List<T> { entity });
-            await db.Database.ExecuteSqlRawAsync(script);
+            await db.Database.ExecuteSqlRawAsync(ScriptGenerator.GetInsert(tableName, new List<T> { entity }));
+        }
+
+        public static async Task AddRangeAsync<T>(this DbContext db, string tableName, List<T> entities)
+            where T : class
+        {
+            await db.Database.ExecuteSqlRawAsync(ScriptGenerator.GetInsert(tableName, entities));
         }
 
         public static IQueryable<T> TempTable<T>(this DbContext db, string tableName)
             where T : class
         {
-            return db.Set<T>().FromSqlRaw($"SELECT * FROM \"{tableName}\";");
+            return db.Set<T>().FromSqlRaw($"SELECT * FROM \"{tableName}\"");
         }
     }
 }

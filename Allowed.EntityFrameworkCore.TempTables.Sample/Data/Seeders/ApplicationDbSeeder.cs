@@ -1,4 +1,5 @@
 ﻿using Allowed.EntityFrameworkCore.TempTables.Sample.Data.DbModels;
+using Allowed.EntityFrameworkCore.TempTables.Sample.Enums;
 using Allowed.EntityFrameworkCore.TempTables.Sample.Models;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -27,7 +28,8 @@ namespace Allowed.EntityFrameworkCore.TempTables.Sample.Data.Seeders
                         Latitude = address.Coordinates.Latitude,
                         Longitude = address.Coordinates.Longitude,
                         PostalCode = address.PostalCode,
-                        State = address.State
+                        State = address.State,
+                        Type = AddressType.Virtual
                     });
                 }
             }

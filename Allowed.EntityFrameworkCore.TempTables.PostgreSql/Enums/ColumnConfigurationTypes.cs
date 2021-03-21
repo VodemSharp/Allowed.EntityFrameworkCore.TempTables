@@ -2,6 +2,6 @@
 {
     public enum ColumnConfigurationTypes
     {
-        Index
+        Key, ForeignKey, Index
     }
 }

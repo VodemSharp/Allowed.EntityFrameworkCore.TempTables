@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Allowed.EntityFrameworkCore.TempTables.Sample.Enums;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Allowed.EntityFrameworkCore.TempTables.Sample.Data.DbModels
@@ -16,5 +17,7 @@ namespace Allowed.EntityFrameworkCore.TempTables.Sample.Data.DbModels
 
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+
+        public AddressType Type { get; set; }
     }
 }

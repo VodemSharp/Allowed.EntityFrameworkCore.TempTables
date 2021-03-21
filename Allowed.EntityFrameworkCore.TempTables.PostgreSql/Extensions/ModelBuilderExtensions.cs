@@ -1,7 +1,6 @@
 ﻿using Allowed.EntityFrameworkCore.TempTables.PostgreSql.Builders;
 using Allowed.EntityFrameworkCore.TempTables.PostgreSql.Configurations;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace Allowed.EntityFrameworkCore.TempTables.PostgreSql.Extensions
 {
