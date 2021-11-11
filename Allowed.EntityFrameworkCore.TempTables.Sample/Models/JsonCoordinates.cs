@@ -4,7 +4,7 @@ namespace Allowed.EntityFrameworkCore.TempTables.Sample.Models
 {
     public class JsonCoordinates
     {
-        [JsonProperty("lan")]
+        [JsonProperty("lat")]
         public double Latitude { get; set; }
 
         [JsonProperty("lng")]

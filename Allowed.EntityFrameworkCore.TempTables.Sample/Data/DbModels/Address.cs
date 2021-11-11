@@ -1,6 +1,5 @@
 ﻿using Allowed.EntityFrameworkCore.TempTables.Sample.Enums;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Allowed.EntityFrameworkCore.TempTables.Sample.Data.DbModels
 {
